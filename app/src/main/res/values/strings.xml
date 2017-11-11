@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">MockExam</string>
+
+    <array name="categories">
+        <item>Animal</item>
+        <item>Math</item>
+        <item>Other</item>
+    </array>
+</resources>
