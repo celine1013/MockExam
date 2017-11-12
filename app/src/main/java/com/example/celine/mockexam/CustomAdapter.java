@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
     private int[] scores;
     private Context mContext;
 
-    public CustomAdapter(int[] scores, Context mContext) {
+    public CustomAdapter(Context mContext, int[] scores) {
         this.scores = scores;
         this.mContext = mContext;
         this.cates = mContext.getResources().getStringArray(R.array.categories);
@@ -50,12 +51,12 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
                 ((Activity)mContext).startActivityForResult(intent,MainActivity.REQUEST_QUIZ);
             }
         });
-
+        Log.d("CUSTOM ADAPTER", "ONBINDVIEWHOLDER");
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return cates.length;
     }
 
     public static class CustomViewHolder extends RecyclerView.ViewHolder{
@@ -67,6 +68,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
             view = itemView;
             tv_cate = itemView.findViewById(R.id.cat);
             tv_score = itemView.findViewById(R.id.score);
+            Log.d("CUSTOM ADAPTER", "VIEW HOLDER SETTING");
         }
     }
 }

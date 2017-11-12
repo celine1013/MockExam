@@ -130,17 +130,26 @@
                 android:orientation="vertical"
                 android:visibility="visible">
 
-                <RadioButton
-                    android:id="@+id/rb_true"
+                <RadioGroup
+                    android:id="@+id/rg_answerset"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="RadioButton" />
+                    android:layout_height="match_parent">
 
-                <RadioButton
-                    android:id="@+id/rb_false"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="RadioButton" />
+                    <RadioButton
+                        android:id="@+id/rb_true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="True" />
+
+                    <RadioButton
+                        android:id="@+id/rb_false"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="False" />
+                </RadioGroup>
+
             </LinearLayout>
         </RelativeLayout>
 

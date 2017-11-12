@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,6 +42,7 @@ public class QuizActivity extends AppCompatActivity {
 
         //bind view
         btn_next = findViewById(R.id.btn_next);
+
         //setView based on question type
         question = questions.get(currentQuestionNum);
         setQuestion(question);
@@ -74,14 +77,38 @@ public class QuizActivity extends AppCompatActivity {
 
     }
 
+    private RadioGroup tf_answerSet;
+    private RadioButton rb_selected;
     private void setQuestion(Question q){
         //set correspondant answer set view
         //disappear others
         //solution 1 for checking question type
         if(q.getQuestionType() == Question.TEXT_QUESTION){
+            //set view
+            ans_ft.setVisibility(View.VISIBLE);
+            ans_mcqm.setVisibility(View.GONE);
+            ans_mcqs.setVisibility(View.GONE);
 
         }else if(q.getQuestionType() == Question.TRUEFALSE_QUESTION){
+            //set view
+            ans_ft.setVisibility(View.GONE);
+            ans_mcqm.setVisibility(View.GONE);
+            ans_mcqs.setVisibility(View.VISIBLE);
 
+            //set answer set
+            tf_answerSet = findViewById(R.id.rg_answerset);
+            tf_answerSet.clearCheck();
+            tf_answerSet.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(RadioGroup radioGroup, int id) {
+                    if(id == R.id.rb_true){
+                        rb_selected = findViewById(R.id.rb_true);
+
+                    }else if(id == R.id.rb_false){
+                        rb_selected = findViewById(R.id.rb_true);
+                    }
+                }
+            });
         }else{
             return;
         }
@@ -93,12 +120,14 @@ public class QuizActivity extends AppCompatActivity {
         if(q instanceof TrueFalseQuestion){
             boolean answer = ((TrueFalseQuestion) q).isAnswer();
 
+
         }else if(q instanceof TextAnsQuestion){
             String trueAnswer = ((TextAnsQuestion) q).getAnswer();
-            
+
         }else{
             return;
         }
+        
         if(correct)score += 10;
     }
 }

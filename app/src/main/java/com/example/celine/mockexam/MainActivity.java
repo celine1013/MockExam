@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView rv_cates;
@@ -14,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     public static final int REQUEST_QUIZ = 0;
 
     private int[] scores = {0, 0, 0, 0};
+    public List<Question> questionList;
 
     //question lists
 
@@ -23,9 +26,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         rv_cates = findViewById(R.id.rv_cates);
-        CustomAdapter adapter = new CustomAdapter(scores, this);
         rv_cates.setLayoutManager(new LinearLayoutManager(this));
-        rv_cates.setAdapter(adapter);
+        rv_cates.setAdapter(new CustomAdapter(this, scores));
+
+        //create question lists
 
     }
 
@@ -41,5 +45,7 @@ public class MainActivity extends AppCompatActivity {
             if(s > scores[c])scores[c] = s;
         }
     }
+
+
 }
 
